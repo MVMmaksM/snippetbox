@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/MVMmaksM/snippetbox/cmd/web/handlers"
 	"github.com/MVMmaksM/snippetbox/config"
 )
 
@@ -20,9 +19,9 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", handlers.Home(app))
-	mux.HandleFunc("/snippet", handlers.ShowSnippet(app))
-	mux.HandleFunc("/snippet/create", handlers.CreateSnippet(app))
+	mux.HandleFunc("/", Home(app))
+	mux.HandleFunc("/snippet", ShowSnippet(app))
+	mux.HandleFunc("/snippet/create", CreateSnippet(app))
 
 	fileServer := http.FileServer(http.Dir("../../ui/static"))
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
